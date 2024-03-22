@@ -2,7 +2,9 @@ import os
 from PIL import Image
 import pillow_avif
 
-onlyfiles = [f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))]
+onlyfiles = [
+    f for f in os.listdir(os.getcwd()) if os.path.isfile(os.path.join(os.getcwd(), f))
+]
 for file in onlyfiles:
     if ".webp" in file:
         print("webp_to_png:yeah we need to process", file)
@@ -14,4 +16,3 @@ for file in onlyfiles:
         print("avif_to_png:yeah we need to process", file)
         im = Image.open(file)
         im.save(file.replace(".avif", ".png"), "PNG")
-
