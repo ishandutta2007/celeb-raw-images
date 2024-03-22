@@ -4,7 +4,7 @@ from PIL import Image
 
 source_path = os.getcwd() + "/donaldtrump/"
 
-f = "bbf18ade-1f5f-11eb-99d6-deeedd63f648_image_hires_124435-removebg-preview.png"
+# f = "bbf18ade-1f5f-11eb-99d6-deeedd63f648_image_hires_124435-removebg-preview.png"
 
 onlyTransFiles = [
     f
@@ -14,8 +14,9 @@ onlyTransFiles = [
 print(onlyTransFiles)
 
 for file in onlyTransFiles:
-    background = Image.open(os.getcwd() + "/" + file)
-    foreground = Image.open(source_path)
+    print("Starting for", file)
+    background = Image.open(os.getcwd() + "/background_1280x720.png")
+    foreground = Image.open(source_path + "/" + file)
     foregroundwidth, foregroundheight = foreground.size
 
     if foregroundheight < 720 and foregroundwidth * 720 / foregroundheight < 1280:
@@ -61,3 +62,13 @@ for file in onlyTransFiles:
     overlay_right_canvas.save(
         dest_path + "/" + file.replace(".png", "_overlay_right.png"), "PNG"
     )
+
+    overlay_centre_canvas = Image.new("RGBA", background.size, (0, 0, 0, 0))
+    overlay_centre_canvas.paste(background, (0, 0))
+    overlay_centre_canvas.paste(
+        foreground, ((1280 - newforegroundwidth)//2, 720 - newforegroundheight), foreground
+    )
+    overlay_centre_canvas.save(
+        dest_path + "/" + file.replace(".png", "_overlay_centre.png"), "PNG"
+    )
+    print("Done for", file)
