@@ -2,7 +2,7 @@ import os
 import math
 from PIL import Image
 
-source_path = os.getcwd() + "/loganpaul/"
+source_path = os.getcwd() + "/markzukerberg/"
 
 # f = "bbf18ade-1f5f-11eb-99d6-deeedd63f648_image_hires_124435-removebg-preview.png"
 
